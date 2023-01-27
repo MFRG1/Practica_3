@@ -5,6 +5,11 @@ int main(void)
     uint16_t valor = 0;
     char c='5';
     //char b='a';
+    int tamstring=100;
+    char PAL[tamstring]; 
+
+
+
     Configurar_PLL(_50MHZ);  //Confiuracion de velocidad de reloj ----SE CAMBIO A 50MHz
     Configurar_UART7();//Yo FCLK 20MHZ Baudrate 9600
 
@@ -13,7 +18,7 @@ int main(void)
     //  Configurar_UART7(); //Angel,Fernanda,Sonia,Aleidis,Monse -fclk 50MHZ Baud-rate 57600
     //  Configurar_UART4(); //Argelia,Roxana,Yesica,Vanesa,Christian,Abiu -fclk 10MHZ Baud-rate 4800
     //  Configurar_UART2(); //Brizet,Monse,Luis,Majo,Alonso -fclk 40MHZ Baud-rate 115200
-    //  Configurar_UART3(); //Jesus,Yesica,Carlos,Dulce,Rodolfo,Leonardo -fclk 80MHZ Baud-rate 19200
+    //  Configurar_UART3(); //Jesus,Yesica,Carlos,Dulce,Rodolfo,Leonardo -fclk g Baud-rate 19200
     //  Configurar_UART2(); //Andrea,Avila,Pamela,Paulina -fclk 50MHZ Baud-rate 57600
     //  Configurar_UART5(); //Hector,Cecilia,Carolina,Jozzafat -fclk 40MHZ Baud-rate 28800
     Configurar_GPIO();
@@ -49,6 +54,12 @@ int main(void)
                  printChar('d');
                  GPIOF->DATA = (1<<3) | (1<<2);
                  break;
+            case 'p':
+                 GPIOF->DATA = (1<<1) | (1<<2) | (1<<3);
+                 tamstring=readString(',',&PAL[0]);
+                 NomInvert(&PAL[0],tamstring);
+                 printString(&PAL[0]); 
+                 break;    
              default:
                  printChar((char)valor);
                  GPIOF->DATA = (0<<1) | (0<<2) | (0<<3);
